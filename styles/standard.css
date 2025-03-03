@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     scroll-behavior: smooth;
+    color: white;
 }
 
 a {
