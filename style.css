@@ -78,6 +78,7 @@ footer{
 .pokecard_img img:hover{
     height: 90%;
     width: 90%;
+    filter: drop-shadow(2px 4px 6px black);
 }
 
 .pokecard_footer{
