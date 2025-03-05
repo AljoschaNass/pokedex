@@ -45,7 +45,7 @@ footer{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 250px;
+    height: 300px;
     width: 200px;
     border-radius: 8px;
 }
@@ -62,15 +62,34 @@ footer{
 }
 
 .pokecard_img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     flex-grow: 1;
 }
 
+.pokecard_img img{
+    height: 80%;
+    width: 80%;
+    cursor: pointer;
+}
+
+.pokecard_img img:hover{
+    height: 90%;
+    width: 90%;
+}
+
 .pokecard_footer{
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     gap: 16px;
-    height: 32px;
+    height: 40px;
     width: 100%;
+    margin-bottom: 4px;
+}
+
+.pokecard_footer img{
+    height: 80%;
 }
