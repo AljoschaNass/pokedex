@@ -1,11 +1,23 @@
 
 function init() {
-    render();
+    //render();
     fetchDataJson();
 }
 
-function render() {
-    templatePokemonCard();
+function render(pokemonResponseAsJson) {
+    templatePokemonCard(pokemonResponseAsJson);     
+}
+
+async function render(responseAsJson) {
+    let contentRef = document.getElementById("content");
+    contentRef.innerHTML = "";
+
+    for (let index = 0; index < responseAsJson.results.length; index++) {
+        let pokemonResponse = await fetch(responseAsJson.results[index].url);
+        let pokemonResponseAsJson = await pokemonResponse.json();
+        console.log(pokemonResponseAsJson);
+        contentRef.innerHTML += templatePokemonCard(pokemonResponseAsJson);       
+    }
 }
 
 async function fetchDataJson() {
@@ -28,8 +40,13 @@ async function fetchDataJson() {
     //console.log(responseAsJson.stats[4].base_stat);
     //console.log(responseAsJson.stats[5].stat.name);
     //console.log(responseAsJson.stats[5].base_stat);
-    console.log(responseAsJson);
-    console.log(responseAsJson.results[0]);
+    //console.log(responseAsJson);
+    //console.log(responseAsJson.results);
+    //console.log(responseAsJson.results[0].name);
+    //console.log(responseAsJson.results[0].url);
+    
+    render(responseAsJson);
+  
 }
 
 function openOverlay() {
