@@ -137,16 +137,14 @@
     </main>
 
     <div onclick="closeOverlay()" id="overlay" class="overlay d_none">
-        <div id="singleOverlay" class="singleOverlay">
-            <div onclick="stopEventBubbling(event)" class="single_element_overlay">
-                <h2>
-                    Bulbasaur
-                </h2>
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="">
-                <div class="control_buttons_overlay">
-                    <button onclick="previousPicture(event)" id="previous_button"><</button>
-                    <button onclick="nextPicture(event)" id="next_button">></button>
-                </div>
+        <div onclick="stopEventBubbling(event)" id="singleOverlay" class="singleOverlay">
+            <h2>
+                Bulbasaur
+            </h2>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="">
+            <div class="control_buttons_overlay">
+                <button onclick="previousPicture(event)" id="previous_button"><</button>
+                <button onclick="nextPicture(event)" id="next_button">></button>
             </div>
         </div>
     </div>

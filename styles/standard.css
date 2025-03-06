@@ -20,3 +20,7 @@ a:hover{
 .d_flex{
     display: flex;
 }
+
+.position_fixed{
+    position: fixed;
+}

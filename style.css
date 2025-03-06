@@ -131,27 +131,17 @@ footer{
     height: 600px;
     width: 500px;
     background-color: #112A2C;
+    padding: 24px;
     border-radius: 24px;
     cursor: default;
 }
 
-.single_element_overlay {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 600px;
-    width: 500px;
-    padding: 24px;
-}
-
-
-.single_element_overlay h2 {
+.singleOverlay h2 {
     color: white;
     font-size: 20px;
 }
 
-.single_element_overlay img {
+.singleOverlay img {
     height: 400px;
     width: 400px;
     border-radius: 12px;
