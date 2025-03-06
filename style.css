@@ -54,7 +54,7 @@ footer{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 24px;
+    height: 32px;
     width: calc(100% - 12px);
     margin-top: 4px;
     margin-left: 12px;
@@ -65,8 +65,8 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 220px;
     width: 100%;
-    flex-grow: 1;
 }
 
 .pokecard_img img{
