@@ -30,3 +30,41 @@ async function fetchDataJson() {
     console.log(responseAsJson.stats[5].base_stat);
     console.log(responseAsJson);
 }
+
+function openOverlay() {
+    let overlayRef = document.getElementById("overlay");
+    overlayRef.classList.remove("d_none");
+    overlayRef.classList.add("d_flex");
+}
+
+function closeOverlay() {
+    let overlayRef = document.getElementById("overlay");
+    overlayRef.classList.add("d_none");
+    overlayRef.classList.remove("d_flex");
+}
+
+function nextPicture(event) {
+    if(currentPicture < pictureName.length - 1) {
+        currentPicture++;
+    } else {
+        currentPicture = 0;
+    }
+
+    renderSingle(currentPicture);
+    event.stopPropagation();
+}
+
+function previousPicture(event) {
+    if(currentPicture > 0) {
+        currentPicture--;
+    } else {
+        currentPicture = 10;
+    }
+
+    renderSingle(currentPicture);
+    event.stopPropagation();
+}
+
+function stopEventBubbling(event) {
+    event.stopPropagation();
+}

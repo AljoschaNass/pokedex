@@ -94,3 +94,102 @@ footer{
 .pokecard_footer img{
     height: 80%;
 }
+
+.single_element {
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.single_element img {
+    height: 156px;
+    width: 156px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid rgba(0, 0, 0, 0.92);
+    cursor: pointer;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.500);
+    cursor: pointer;
+}
+
+.singleOverlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 600px;
+    width: 500px;
+    background-color: #112A2C;
+    border-radius: 24px;
+    cursor: default;
+}
+
+.single_element_overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 600px;
+    width: 500px;
+    padding: 24px;
+}
+
+
+.single_element_overlay h2 {
+    color: white;
+    font-size: 20px;
+}
+
+.single_element_overlay img {
+    height: 400px;
+    width: 400px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.img_border {
+    border-color: #296266 !important;
+}
+
+.control_buttons_overlay {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+}
+.control_buttons_overlay button {
+    background-color: #8D4D3F;
+    cursor: pointer;
+    border: 0;
+    border-radius: 16px;
+    height: 32px;
+    width: 32px;
+}
+
+.control_buttons_overlay button:hover {
+    background-color: #9B5546;
+    color: black;
+}
+
+#previous_button {
+    margin-left: 112px;
+}
+
+#next_button {
+    margin-right: 112px;
+}
+
+.current_count {
+    font-size: 20px;
+}
