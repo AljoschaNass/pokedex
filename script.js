@@ -1,46 +1,55 @@
 
+let allPokemons = [];
+let currentPokemons = [];
+
 function init() {
-    //render();
     fetchDataJson();
 }
 
-async function render(responseAsJson) {
+async function renderPokemons(responseAsJson) {
     let contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
 
     for (let index = 0; index < responseAsJson.results.length; index++) {
         let pokemonResponse = await fetch(responseAsJson.results[index].url);
         let pokemonResponseAsJson = await pokemonResponse.json();
-        console.log(pokemonResponseAsJson);
-        contentRef.innerHTML += templatePokemonCard(pokemonResponseAsJson, index);
-        renderTypes(pokemonResponseAsJson, index);    
+        allPokemons.push(pokemonResponseAsJson);        
+        contentRef.innerHTML += templatePokemonCard(index);
+        renderTypes(index);    
     }
 }
 
-async function renderTypes(pokemonResponseAsJson, index) {
+async function renderTypes(index) {
     let contentRef = document.getElementById("pokecard_footer_" + index);
     contentRef.innerHTML = "";
 
-    for (let indexType = 0; indexType < pokemonResponseAsJson.types.length; indexType++) {
-        contentRef.innerHTML += templateType(pokemonResponseAsJson, indexType);   
+    for (let indexType = 0; indexType < allPokemons[index].types.length; indexType++) {
+        contentRef.innerHTML += templateType(index, indexType);   
         if(indexType == 0) {
-            setBgColor(pokemonResponseAsJson, index);
+            setBgColor(index);
         }
     }
 }
 
-function setBgColor(pokemonResponseAsJson, index) {
+function renderOverlay(index) {
+    //currentPicture = index;
+    let singleContentRef = document.getElementById("singleOverlay");
+    singleContentRef.innerHTML = "";
+    singleContentRef.innerHTML = templateOverlay(index); 
+}
+
+function setBgColor(index) {
     let typeRef = document.getElementById("pokecard_" + index);
-    typeRef.classList.add("bg_" + pokemonResponseAsJson.types[0].type.name);
+    typeRef.classList.add("bg_" + allPokemons[index].types[0].type.name);
 }
 
 async function fetchDataJson() {
-    let response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=39&offset=0");
+    let response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=21&offset=0");
     let responseAsJson = await response.json();
 
-    render(responseAsJson);
+    renderPokemons(responseAsJson);
 
-    //console.log(responseAsJson.name);
+    //console.log(responseAsJson);
     //console.log(responseAsJson.id);
     //console.log(responseAsJson.sprites.other.dream_world.front_default);
     //console.log(responseAsJson.types[0].type.name);
@@ -63,7 +72,8 @@ async function fetchDataJson() {
     //console.log(responseAsJson.results[0].url);  
 }
 
-function openOverlay() {
+function openOverlay(index) {
+    renderOverlay(index);
     let overlayRef = document.getElementById("overlay");
     overlayRef.classList.remove("d_none");
     overlayRef.classList.add("d_flex");
@@ -77,25 +87,27 @@ function closeOverlay() {
     togglePositionFixed();
 }
 
-function nextPicture(event) {
-    if(currentPicture < pictureName.length - 1) {
-        currentPicture++;
+function nextPicture(event, index) {
+    let currentIndex = index;
+    if(currentIndex< allPokemons.length - 1) {
+        currentIndex++;
     } else {
-        currentPicture = 0;
+        currentIndex = 0;
     }
 
-    renderSingle(currentPicture);
+    renderOverlay(currentIndex);
     event.stopPropagation();
 }
 
-function previousPicture(event) {
-    if(currentPicture > 0) {
-        currentPicture--;
+function previousPicture(event, index) {
+    let currentIndex = index;
+    if(currentIndex > 0) {
+        currentIndex--;
     } else {
-        currentPicture = 10;
+        currentIndex = allPokemons.length - 1;
     }
 
-    renderSingle(currentPicture);
+    renderOverlay(currentIndex);
     event.stopPropagation();
 }
 
