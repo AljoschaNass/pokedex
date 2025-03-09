@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/assets/icons/pokeball.png">
+    <link rel="icon" type="image/x-icon" href="/assets/img/pokeball.png">
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styles/standard.css">
@@ -18,10 +18,21 @@
 </head>
 <body onload="init()">
     <header>
-        <h1>Pokedex</h1>
+        <div class="header_logo">
+            <img src="./assets/img/pokeball.png" alt="pokeball">
+            <h1>Pokedex</h1>
+        </div>
+        <div class="searching_section">
+            <input id="searching" class="input_search" type="text">
+            <img onclick="searchPokemon()" class="img_search" src="./assets/img/lens.png" alt="lens">
+        </div>
     </header>
 
-    <main id="content" class="content">
+    <div class="loading_screen" id="loading_screen">
+        <img src="./assets/img/pokeball.png" alt="">
+    </div>
+
+    <main id="content" class="content d_none">
     </main>
 
     <div>

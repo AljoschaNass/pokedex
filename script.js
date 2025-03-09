@@ -1,7 +1,7 @@
 
 let allPokemons = [];
 let currentPokemons = [];
-let nextUrl = "https://pokeapi.co/api/v2/pokemon?limit=3&offset=0";
+let nextUrl = "https://pokeapi.co/api/v2/pokemon?limit=21&offset=0";
 
 function init() {
     fetchDataJson();
@@ -12,28 +12,6 @@ async function fetchDataJson() {
     let responseAsJson = await response.json();
     nextUrl = responseAsJson.next;
     savePokemonData(responseAsJson);
-
-    //console.log(responseAsJson);
-    //console.log(responseAsJson.id);
-    //console.log(responseAsJson.sprites.other.dream_world.front_default);
-    //console.log(responseAsJson.types[0].type.name);
-    //console.log(responseAsJson.types[1].type.name);
-    //console.log(responseAsJson.stats[0].stat.name);
-    //console.log(responseAsJson.stats[0].base_stat);
-    //console.log(responseAsJson.stats[1].stat.name);
-    //console.log(responseAsJson.stats[1].base_stat);
-    //console.log(responseAsJson.stats[2].stat.name);
-    //console.log(responseAsJson.stats[2].base_stat);
-    //console.log(responseAsJson.stats[3].stat.name);
-    //console.log(responseAsJson.stats[3].base_stat);
-    //console.log(responseAsJson.stats[4].stat.name);
-    //console.log(responseAsJson.stats[4].base_stat);
-    //console.log(responseAsJson.stats[5].stat.name);
-    //console.log(responseAsJson.stats[5].base_stat);
-    //console.log(responseAsJson);
-    //console.log(responseAsJson.results);
-    //console.log(responseAsJson.results[0].name);
-    //console.log(responseAsJson.results[0].url);  
 }
 
 async function savePokemonData(responseAsJson) {
@@ -43,6 +21,15 @@ async function savePokemonData(responseAsJson) {
         allPokemons.push(pokemonResponseAsJson);        
     }
     renderPokemons();
+    const myTimeout = setTimeout(showContent, 3000);
+}
+
+function showContent() {
+    let loadingScreenRef = document.getElementById("loading_screen");
+    let contentRef = document.getElementById("content");
+
+    loadingScreenRef.classList.add("d_none");
+    contentRef.classList.remove("d_none");
 }
 
 function loadMore() {
@@ -141,4 +128,12 @@ function stopEventBubbling(event) {
 function togglePositionFixed() {
     let contentRef = document.getElementById("content");
     contentRef.classList.toggle("position_fixed");
+}
+
+function searchPokemon() {
+    let inputRef = document.getElementById("searching");
+    
+    if(inputRef.value.length >= 3) {
+        console.log(inputRef.value);
+    }
 }
