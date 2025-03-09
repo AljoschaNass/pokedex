@@ -11,7 +11,7 @@ header{
     padding-inline: 32px;
     position: fixed;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgb(50, 50, 50);
 }
 
 footer{
@@ -22,12 +22,16 @@ footer{
     align-items: center;
     position: fixed;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgb(50, 50, 50);
 }
 
 .links{
     display: flex;
     gap: 8px;
+}
+
+.pokemon_name{
+    text-transform: capitalize;
 }
 
 .content{
@@ -36,7 +40,8 @@ footer{
     align-items: flex-start;
     flex-wrap: wrap;
     gap: 24px;
-    margin: 96px 32px;
+    margin-top: 80px;
+    margin-inline: 32px;
     min-height: calc(100vh - (64px + 64px));
 }
 
@@ -93,6 +98,29 @@ footer{
 
 .pokecard_footer img{
     height: 80%;
+}
+
+.btn_section{
+    width: 100%;
+    margin-top: 16px;
+    padding-bottom: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn_load_more{
+    color: white;
+    height: 40px;
+    width: 100px;
+    background-color: #112A2C;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn_load_more:hover{
+    background-color: #112a2ce3;
 }
 
 .single_element {

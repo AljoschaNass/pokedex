@@ -1,19 +1,59 @@
 
 let allPokemons = [];
 let currentPokemons = [];
+let nextUrl = "https://pokeapi.co/api/v2/pokemon?limit=21&offset=0";
 
 function init() {
     fetchDataJson();
 }
 
-async function renderPokemons(responseAsJson) {
-    let contentRef = document.getElementById("content");
-    contentRef.innerHTML = "";
+async function fetchDataJson() {
+    let response = await fetch(nextUrl);
+    let responseAsJson = await response.json();
+    nextUrl = responseAsJson.next;
+    savePokemonData(responseAsJson);
 
+    //console.log(responseAsJson);
+    //console.log(responseAsJson.id);
+    //console.log(responseAsJson.sprites.other.dream_world.front_default);
+    //console.log(responseAsJson.types[0].type.name);
+    //console.log(responseAsJson.types[1].type.name);
+    //console.log(responseAsJson.stats[0].stat.name);
+    //console.log(responseAsJson.stats[0].base_stat);
+    //console.log(responseAsJson.stats[1].stat.name);
+    //console.log(responseAsJson.stats[1].base_stat);
+    //console.log(responseAsJson.stats[2].stat.name);
+    //console.log(responseAsJson.stats[2].base_stat);
+    //console.log(responseAsJson.stats[3].stat.name);
+    //console.log(responseAsJson.stats[3].base_stat);
+    //console.log(responseAsJson.stats[4].stat.name);
+    //console.log(responseAsJson.stats[4].base_stat);
+    //console.log(responseAsJson.stats[5].stat.name);
+    //console.log(responseAsJson.stats[5].base_stat);
+    //console.log(responseAsJson);
+    //console.log(responseAsJson.results);
+    //console.log(responseAsJson.results[0].name);
+    //console.log(responseAsJson.results[0].url);  
+}
+
+async function savePokemonData(responseAsJson) {
     for (let index = 0; index < responseAsJson.results.length; index++) {
         let pokemonResponse = await fetch(responseAsJson.results[index].url);
         let pokemonResponseAsJson = await pokemonResponse.json();
         allPokemons.push(pokemonResponseAsJson);        
+    }
+    renderPokemons();
+}
+
+function loadMore() {
+    fetchDataJson();
+}
+
+function renderPokemons() {
+    let contentRef = document.getElementById("content");
+    contentRef.innerHTML = "";
+
+    for (let index = 0; index < allPokemons.length; index++) {      
         contentRef.innerHTML += templatePokemonCard(index);
         renderTypes(index);    
     }
@@ -41,35 +81,6 @@ function renderOverlay(index) {
 function setBgColor(index) {
     let typeRef = document.getElementById("pokecard_" + index);
     typeRef.classList.add("bg_" + allPokemons[index].types[0].type.name);
-}
-
-async function fetchDataJson() {
-    let response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=21&offset=0");
-    let responseAsJson = await response.json();
-
-    renderPokemons(responseAsJson);
-
-    //console.log(responseAsJson);
-    //console.log(responseAsJson.id);
-    //console.log(responseAsJson.sprites.other.dream_world.front_default);
-    //console.log(responseAsJson.types[0].type.name);
-    //console.log(responseAsJson.types[1].type.name);
-    //console.log(responseAsJson.stats[0].stat.name);
-    //console.log(responseAsJson.stats[0].base_stat);
-    //console.log(responseAsJson.stats[1].stat.name);
-    //console.log(responseAsJson.stats[1].base_stat);
-    //console.log(responseAsJson.stats[2].stat.name);
-    //console.log(responseAsJson.stats[2].base_stat);
-    //console.log(responseAsJson.stats[3].stat.name);
-    //console.log(responseAsJson.stats[3].base_stat);
-    //console.log(responseAsJson.stats[4].stat.name);
-    //console.log(responseAsJson.stats[4].base_stat);
-    //console.log(responseAsJson.stats[5].stat.name);
-    //console.log(responseAsJson.stats[5].base_stat);
-    //console.log(responseAsJson);
-    //console.log(responseAsJson.results);
-    //console.log(responseAsJson.results[0].name);
-    //console.log(responseAsJson.results[0].url);  
 }
 
 function openOverlay(index) {

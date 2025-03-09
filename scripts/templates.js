@@ -3,7 +3,7 @@ function templatePokemonCard(index) {
         <div onclick="openOverlay(${index})" id="pokecard_${index}" class="pokecard">
             <div id="pokecard_header" class="pokecard_header">
                 <h3>#${allPokemons[index].id}</h3>
-                <h3>${allPokemons[index].name}</h3>
+                <h3 class="pokemon_name">${allPokemons[index].name}</h3>
             </div>
             <div id="pokecard_img" class="pokecard_img">
                 <img src="${allPokemons[index].sprites.other.dream_world.front_default}" alt="${allPokemons[index].name}-image">
@@ -22,9 +22,7 @@ function templateType(index,indexType) {
 
 function templateOverlay(index) {
     return `    
-        <h2>
-            ${allPokemons[index].name}
-        </h2>
+        <h2 class="pokemon_name">${allPokemons[index].name}</h2>
         <img src="${allPokemons[index].sprites.other.dream_world.front_default}" alt="${allPokemons[index].name}-image">
         <div class="control_buttons_overlay">
             <button onclick="previousPicture(event, ${index})" id="previous_button"><</button>
