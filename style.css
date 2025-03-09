@@ -123,6 +123,10 @@ footer{
     background-color: #112a2ce3;
 }
 
+.btn_disabled{
+    background-color: #112a2ce3;
+}
+
 .single_element {
     margin: 8px;
     display: flex;
@@ -170,14 +174,8 @@ footer{
 }
 
 .singleOverlay img {
-    height: 400px;
-    width: 400px;
-    border-radius: 12px;
-    object-fit: cover;
-}
-
-.img_border {
-    border-color: #296266 !important;
+    height: 80%;
+    width: 80%;
 }
 
 .control_buttons_overlay {
@@ -186,6 +184,7 @@ footer{
     align-items: center;
     width: 500px;
 }
+
 .control_buttons_overlay button {
     background-color: #8D4D3F;
     cursor: pointer;

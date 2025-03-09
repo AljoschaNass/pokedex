@@ -1,7 +1,7 @@
 
 let allPokemons = [];
 let currentPokemons = [];
-let nextUrl = "https://pokeapi.co/api/v2/pokemon?limit=21&offset=0";
+let nextUrl = "https://pokeapi.co/api/v2/pokemon?limit=3&offset=0";
 
 function init() {
     fetchDataJson();
@@ -47,6 +47,18 @@ async function savePokemonData(responseAsJson) {
 
 function loadMore() {
     fetchDataJson();
+}
+
+function disableLoadMoreButton() {
+    let disableBtn = document.getElementById("btn_load_more");
+    disableBtn.disabled = true;
+    disableBtn.classList.add("btn_disabled");
+}
+
+function enableLoadMoreButton() {
+    let enableBtn = document.getElementById("btn_load_more");
+    enableBtn.disabled = false;
+    enableBtn.classList.remove("btn_disabled");
 }
 
 function renderPokemons() {
