@@ -1,6 +1,9 @@
 
 let allPokemons = [];
 let currentPokemons = [];
+let allPokemonNames = [];
+let currentPokemonNames = [];
+let searchingInput = "";
 let nextUrl = "https://pokeapi.co/api/v2/pokemon?limit=21&offset=0";
 
 function init() {
@@ -18,10 +21,13 @@ async function savePokemonData(responseAsJson) {
     for (let index = 0; index < responseAsJson.results.length; index++) {
         let pokemonResponse = await fetch(responseAsJson.results[index].url);
         let pokemonResponseAsJson = await pokemonResponse.json();
-        allPokemons.push(pokemonResponseAsJson);        
+        allPokemons.push(pokemonResponseAsJson);   
+        allPokemonNames.push(pokemonResponseAsJson.name);   
     }
+    currentPokemons = allPokemons;   
+    currentPokemonNames = allPokemonNames; 
     renderPokemons();
-    const myTimeout = setTimeout(showContent, 3000);
+    const myTimeout = setTimeout(showContent, 3000);    
 }
 
 function showContent() {
@@ -52,10 +58,24 @@ function renderPokemons() {
     let contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
 
-    for (let index = 0; index < allPokemons.length; index++) {      
-        contentRef.innerHTML += templatePokemonCard(index);
-        renderTypes(index);    
+    console.log(allPokemons);
+    console.log(currentPokemons);
+    console.log(allPokemonNames);
+    console.log(currentPokemonNames);
+    
+
+    for (let indexCurrent = 0; indexCurrent < currentPokemonNames.length; indexCurrent++) {
+        for (let index = 0; index < currentPokemons.length; index++) {      
+            if(currentPokemons[index].name == currentPokemonNames[indexCurrent]) {
+                contentRef.innerHTML += templatePokemonCard(index);
+                renderTypes(index); 
+
+                console.log(currentPokemons[index].name);
+                console.log(currentPokemonNames[indexCurrent]);
+            }
+        }           
     }
+
 }
 
 async function renderTypes(index) {
@@ -134,6 +154,14 @@ function searchPokemon() {
     let inputRef = document.getElementById("searching");
     
     if(inputRef.value.length >= 3) {
-        console.log(inputRef.value);
-    }
+        searchingInput = inputRef.value;
+        currentPokemonNames = allPokemonNames.filter(checkPokemons);    
+    } else {
+        currentPokemonNames = allPokemonNames;
+    }        
+    renderPokemons();
 }
+
+function checkPokemons(name) {
+    return name.includes(searchingInput);
+  }
