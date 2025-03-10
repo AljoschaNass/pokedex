@@ -57,53 +57,51 @@ function enableLoadMoreButton() {
 function renderPokemons() {
     let contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
-
-    console.log(allPokemons);
-    console.log(currentPokemons);
-    console.log(allPokemonNames);
-    console.log(currentPokemonNames);
-    
+    currentPokemons = [];
 
     for (let indexCurrent = 0; indexCurrent < currentPokemonNames.length; indexCurrent++) {
-        for (let index = 0; index < currentPokemons.length; index++) {      
-            if(currentPokemons[index].name == currentPokemonNames[indexCurrent]) {
-                contentRef.innerHTML += templatePokemonCard(index);
-                renderTypes(index); 
-
-                console.log(currentPokemons[index].name);
-                console.log(currentPokemonNames[indexCurrent]);
+        for (let index = 0; index < allPokemons.length; index++) {      
+            if(allPokemons[index].name == currentPokemonNames[indexCurrent]) {
+                contentRef.innerHTML += templatePokemonCard(index, indexCurrent);
+                currentPokemons.push(allPokemons[index])
+                renderTypes(index, indexCurrent); 
             }
         }           
     }
-
 }
 
-async function renderTypes(index) {
+async function renderTypes(index, indexCurrent) {
     let contentRef = document.getElementById("pokecard_footer_" + index);
     contentRef.innerHTML = "";
 
-    for (let indexType = 0; indexType < allPokemons[index].types.length; indexType++) {
-        contentRef.innerHTML += templateType(index, indexType);   
+    for (let indexType = 0; indexType < currentPokemons[indexCurrent].types.length; indexType++) {
+        contentRef.innerHTML += templateType(indexCurrent, indexType);   
         if(indexType == 0) {
-            setBgColor(index);
+            setBgColor(index, indexCurrent);
         }
     }
 }
 
-function renderOverlay(index) {
+function renderOverlay(indexCurrent) {
     //currentPicture = index;
+
+    console.log(currentPokemons);
+    console.log(indexCurrent);
+    
+    
+
     let singleContentRef = document.getElementById("singleOverlay");
     singleContentRef.innerHTML = "";
-    singleContentRef.innerHTML = templateOverlay(index); 
+    singleContentRef.innerHTML = templateOverlay(indexCurrent); 
 }
 
-function setBgColor(index) {
+function setBgColor(index, indexCurrent) {
     let typeRef = document.getElementById("pokecard_" + index);
-    typeRef.classList.add("bg_" + allPokemons[index].types[0].type.name);
+    typeRef.classList.add("bg_" + currentPokemons[indexCurrent].types[0].type.name);
 }
 
-function openOverlay(index) {
-    renderOverlay(index);
+function openOverlay(indexCurrent) {
+    renderOverlay(indexCurrent);
     let overlayRef = document.getElementById("overlay");
     overlayRef.classList.remove("d_none");
     overlayRef.classList.add("d_flex");
@@ -117,9 +115,9 @@ function closeOverlay() {
     togglePositionFixed();
 }
 
-function nextPicture(event, index) {
+function nextPokemon(event, index) {
     let currentIndex = index;
-    if(currentIndex< allPokemons.length - 1) {
+    if(currentIndex< currentPokemons.length - 1) {
         currentIndex++;
     } else {
         currentIndex = 0;
@@ -129,12 +127,12 @@ function nextPicture(event, index) {
     event.stopPropagation();
 }
 
-function previousPicture(event, index) {
+function previousPokemon(event, index) {
     let currentIndex = index;
     if(currentIndex > 0) {
         currentIndex--;
     } else {
-        currentIndex = allPokemons.length - 1;
+        currentIndex = currentPokemons.length - 1;
     }
 
     renderOverlay(currentIndex);
@@ -152,13 +150,14 @@ function togglePositionFixed() {
 
 function searchPokemon() {
     let inputRef = document.getElementById("searching");
-    
-    if(inputRef.value.length >= 3) {
-        searchingInput = inputRef.value;
+    inputRef = inputRef.value.toLowerCase();
+        
+    if(inputRef.length >= 3) {
+        searchingInput = inputRef;
         currentPokemonNames = allPokemonNames.filter(checkPokemons);    
     } else {
         currentPokemonNames = allPokemonNames;
-    }        
+    }            
     renderPokemons();
 }
 
