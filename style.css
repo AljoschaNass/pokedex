@@ -2,8 +2,14 @@ body{
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.privacy_policy{
+.content_wraper{
     display: flex;
+    flex-direction: column;
+}
+
+.privacy_policy, .impressum{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -59,6 +65,8 @@ header{
     width: 250px;
     color: #112A2C;
     font-size: 20px;
+    border-radius: 8px;
+    border: 0;
 }
 
 .img_search{

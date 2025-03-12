@@ -24,3 +24,7 @@ a:hover{
 .position_fixed{
     position: fixed;
 }
+
+.curser_loading{
+    cursor: wait !important;
+}

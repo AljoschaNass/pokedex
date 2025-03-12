@@ -20,6 +20,7 @@ function init() {
 }
 
 async function fetchDataJson() {
+    toggleLoadingCurser();
     disableLoadMoreButton();
     let response = await fetch(nextUrl);
     let responseAsJson = await response.json();
@@ -41,6 +42,7 @@ async function savePokemonData(responseAsJson) {
 }
 
 function showContent() {
+    toggleLoadingCurser();
     enableLoadMoreButton();
     let loadingScreenRef = document.getElementById("loading_screen");
     let contentRef = document.getElementById("content");
@@ -155,6 +157,11 @@ function stopEventBubbling(event) {
 function togglePositionFixed() {
     let contentRef = document.getElementById("content");
     contentRef.classList.toggle("position_fixed");
+}
+
+function toggleLoadingCurser() {
+    let contentRef = document.getElementById("content_wraper");
+    contentRef.classList.toggle("curser_loading");
 }
 
 function searchPokemon() {
