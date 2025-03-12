@@ -24,7 +24,7 @@ function templateOverlay(indexCurrent) {
     return `    
         <h2 class="pokemon_name">${currentPokemons[indexCurrent].name}</h2>
         <div class="overlay_img_section">
-            <div class="overlay_types">
+            <div id="overlay_types" class="overlay_types">
                 <img class="overlay_type_icons" src="./assets/icons/grass.svg" alt="">
                 <img class="overlay_type_icons" src="./assets/icons/poison.svg" alt="">
             </div>

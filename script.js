@@ -6,6 +6,11 @@ let currentPokemonNames = [];
 let searchingInput = "";
 let nextUrl = "https://pokeapi.co/api/v2/pokemon?limit=21&offset=0";
 let selectedStat = "";
+let typesArray = ["grass", "fire", "water", "bug", "normal", "poison", 
+                "flying", "electric", "ground", "fairy", "fighting", 
+                "psychic", "rock", "steel", "ice", "ghost", "dragon", 
+                "dark"
+    ]
 
 let input = document.getElementById("searching");
 input.addEventListener("keypress", function(event) {
@@ -98,12 +103,38 @@ async function renderTypes(index, indexCurrent) {
 function renderOverlay(indexCurrent) {
     let singleContentRef = document.getElementById("singleOverlay");
     singleContentRef.innerHTML = "";
-    singleContentRef.innerHTML = templateOverlay(indexCurrent); 
+    singleContentRef.innerHTML = templateOverlay(indexCurrent);  
+    removeBgOverlay();
+    renderTypesOverlay(indexCurrent);   
 }
 
 function setBgColor(index, indexCurrent) {
     let typeRef = document.getElementById("pokecard_" + index);
     typeRef.classList.add("bg_" + currentPokemons[indexCurrent].types[0].type.name);
+}
+
+async function renderTypesOverlay(indexCurrent) {
+    let contentRef = document.getElementById("overlay_types");
+    contentRef.innerHTML = "";
+    
+    for (let indexType = 0; indexType < currentPokemons[indexCurrent].types.length; indexType++) {
+        contentRef.innerHTML += templateType(indexCurrent, indexType);   
+        if(indexType == 0) {
+            setBgColorOverlay(indexCurrent);
+        }
+    }
+}
+
+function setBgColorOverlay(indexCurrent) {
+    let typeRef = document.getElementById("singleOverlay");
+    typeRef.classList.add("bg_" + currentPokemons[indexCurrent].types[0].type.name);
+}
+
+function removeBgOverlay() {
+    let typeRef = document.getElementById("singleOverlay");
+    for (let i = 0; i < typesArray.length; i++) {
+        typeRef.classList.remove("bg_" + typesArray[i]);
+    }
 }
 
 function openOverlay(indexCurrent) {
