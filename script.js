@@ -6,11 +6,20 @@ let currentPokemonNames = [];
 let searchingInput = "";
 let nextUrl = "https://pokeapi.co/api/v2/pokemon?limit=21&offset=0";
 
+let input = document.getElementById("searching");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("btn_search").click();
+  }
+});
+
 function init() {
     fetchDataJson();
 }
 
 async function fetchDataJson() {
+    disableLoadMoreButton();
     let response = await fetch(nextUrl);
     let responseAsJson = await response.json();
     nextUrl = responseAsJson.next;
@@ -27,10 +36,11 @@ async function savePokemonData(responseAsJson) {
     currentPokemons = allPokemons;   
     currentPokemonNames = allPokemonNames; 
     renderPokemons();
-    const myTimeout = setTimeout(showContent, 3000);    
+    const myTimeout = setTimeout(showContent, 2000);    
 }
 
 function showContent() {
+    enableLoadMoreButton();
     let loadingScreenRef = document.getElementById("loading_screen");
     let contentRef = document.getElementById("content");
 
@@ -83,13 +93,6 @@ async function renderTypes(index, indexCurrent) {
 }
 
 function renderOverlay(indexCurrent) {
-    //currentPicture = index;
-
-    console.log(currentPokemons);
-    console.log(indexCurrent);
-    
-    
-
     let singleContentRef = document.getElementById("singleOverlay");
     singleContentRef.innerHTML = "";
     singleContentRef.innerHTML = templateOverlay(indexCurrent); 
@@ -150,11 +153,12 @@ function togglePositionFixed() {
 
 function searchPokemon() {
     let inputRef = document.getElementById("searching");
-    inputRef = inputRef.value.toLowerCase();
+    let inputRefLow = inputRef.value.toLowerCase();
         
-    if(inputRef.length >= 3) {
-        searchingInput = inputRef;
+    if(inputRefLow.length >= 3) {
+        searchingInput = inputRefLow;
         currentPokemonNames = allPokemonNames.filter(checkPokemons);    
+        inputRef.value = "";
     } else {
         currentPokemonNames = allPokemonNames;
     }            

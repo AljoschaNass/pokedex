@@ -12,7 +12,6 @@
 
     <script src="./scripts/db.js"></script>
     <script src="./scripts/templates.js"></script>
-    <script src="script.js"></script>
     
     <title>Pokedex</title>
 </head>
@@ -23,8 +22,8 @@
             <h1>Pokedex</h1>
         </div>
         <div class="searching_section">
-            <input id="searching" class="input_search" type="text">
-            <img onclick="searchPokemon()" class="img_search" src="./assets/img/lens.png" alt="lens">
+            <input id="searching" class="input_search" type="text" value="">
+            <img onclick="searchPokemon()" id="btn_search" class="img_search" src="./assets/img/lens.png" alt="lens">
         </div>
     </header>
 
@@ -130,5 +129,7 @@
             <a href="html/datenschutz.html" target="_blank">Datenschutz</a>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
