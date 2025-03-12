@@ -5,6 +5,7 @@ let allPokemonNames = [];
 let currentPokemonNames = [];
 let searchingInput = "";
 let nextUrl = "https://pokeapi.co/api/v2/pokemon?limit=21&offset=0";
+let selectedStat = "";
 
 let input = document.getElementById("searching");
 input.addEventListener("keypress", function(event) {
@@ -67,14 +68,14 @@ function enableLoadMoreButton() {
 function renderPokemons() {
     let contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
-    currentPokemons = [];
+    currentPokemons = [];    
 
     for (let indexCurrent = 0; indexCurrent < currentPokemonNames.length; indexCurrent++) {
         for (let index = 0; index < allPokemons.length; index++) {      
             if(allPokemons[index].name == currentPokemonNames[indexCurrent]) {
                 contentRef.innerHTML += templatePokemonCard(index, indexCurrent);
                 currentPokemons.push(allPokemons[index])
-                renderTypes(index, indexCurrent); 
+                renderTypes(index, indexCurrent);                 
             }
         }           
     }
@@ -104,11 +105,13 @@ function setBgColor(index, indexCurrent) {
 }
 
 function openOverlay(indexCurrent) {
+    selectedStat = "about";
     renderOverlay(indexCurrent);
     let overlayRef = document.getElementById("overlay");
     overlayRef.classList.remove("d_none");
     overlayRef.classList.add("d_flex");
     togglePositionFixed();
+    setOverlayStats(selectedStat);
 }
 
 function closeOverlay() {
@@ -116,6 +119,7 @@ function closeOverlay() {
     overlayRef.classList.add("d_none");
     overlayRef.classList.remove("d_flex");
     togglePositionFixed();
+    selectedStat = "about";
 }
 
 function nextPokemon(event, index) {
@@ -127,6 +131,7 @@ function nextPokemon(event, index) {
     }
 
     renderOverlay(currentIndex);
+    setOverlayStats(selectedStat);
     event.stopPropagation();
 }
 
@@ -139,6 +144,7 @@ function previousPokemon(event, index) {
     }
 
     renderOverlay(currentIndex);
+    setOverlayStats(selectedStat);
     event.stopPropagation();
 }
 
@@ -167,4 +173,36 @@ function searchPokemon() {
 
 function checkPokemons(name) {
     return name.includes(searchingInput);
+  }
+
+  function setOverlayStats(id) {
+    let aboutRef = document.getElementById("about_section");
+    let baseStatsRef = document.getElementById("base_stats_section");
+    let evolutionRef = document.getElementById("evolution_section");
+    let movesRef = document.getElementById("moves_section");
+    let currentSectionRef = document.getElementById(id + "_section")
+
+    selectedStat = id;
+
+    aboutRef.classList.add("d_none");
+    baseStatsRef.classList.add("d_none");
+    evolutionRef.classList.add("d_none");
+    movesRef.classList.add("d_none");
+    currentSectionRef.classList.remove("d_none");
+
+    setOverlayStatsBorder(id);
+  }
+
+  function setOverlayStatsBorder(id) {
+    let aboutRef = document.getElementById("about_link");
+    let baseStatsRef = document.getElementById("base_stats_link");
+    let evolutionRef = document.getElementById("evolution_link");
+    let movesRef = document.getElementById("moves_link");
+    let currentSectionRef = document.getElementById(id + "_link")
+
+    aboutRef.classList.remove("selected");
+    baseStatsRef.classList.remove("selected");
+    evolutionRef.classList.remove("selected");
+    movesRef.classList.remove("selected");
+    currentSectionRef.classList.add("selected");
   }
