@@ -18,16 +18,18 @@
 </head>
 <body onload="init()" id="body">
 
-    <div id="content_wraper" class="content_wraper">
+<div id="content_wraper" class="content_wraper">
 
     <header>
-        <div class="header_logo">
-            <img src="./assets/img/pokeball.png" alt="pokeball">
-            <h1>Pokedex</h1>
-        </div>
-        <div class="searching_section">
-            <input id="searching" class="input_search" type="text" value="">
-            <img onclick="searchPokemon()" id="btn_search" class="img_search" src="./assets/img/lens.png" alt="lens">
+        <div class="header">
+            <div class="header_logo">
+                <img src="./assets/img/pokeball.png" alt="pokeball">
+                <h1>Pokedex</h1>
+            </div>
+            <div class="searching_section">
+                <input id="searching" class="input_search" type="text" value="">
+                <img onclick="searchPokemon()" id="btn_search" class="img_search" src="./assets/img/lens.png" alt="lens">
+            </div>
         </div>
     </header>
 
@@ -35,8 +37,11 @@
         <img src="./assets/img/pokeball.png" alt="">
     </div>
 
-    <main id="content" class="content d_none">
-    </main>
+    <div class="content_max_width">
+        <main id="content" class="content d_none">
+        </main>
+    </div>
+    
 
     <div class="btn_section">
         <button onclick="loadMore()" id="btn_load_more" class="btn_load_more">Mehr Laden</button>
@@ -49,10 +54,12 @@
     </div>
 
     <footer>
-        <p>Copyright 2025 Aljoscha Naß</p>
-        <div class="links">
-            <a href="html/impressum.html" target="_blank">Impressum</a>
-            <a href="html/datenschutz.html" target="_blank">Datenschutz</a>
+        <div class="footer">
+            <p>Copyright 2025 Aljoscha Naß</p>
+            <div class="links">
+                <a href="html/impressum.html" target="_blank">Impressum</a>
+                <a href="html/datenschutz.html" target="_blank">Datenschutz</a>
+            </div>
         </div>
     </footer>
 </div>
