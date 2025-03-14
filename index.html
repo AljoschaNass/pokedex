@@ -27,6 +27,7 @@
                 <h1>Pokedex</h1>
             </div>
             <div class="searching_section">
+                <button onclick="searchPokemon()" id="btn_back" class="btn_back"><<</button>
                 <input id="searching" class="input_search" type="text" value="" placeholder="Suche...">
                 <img onclick="searchPokemon()" id="btn_search" class="img_search" src="./assets/img/lens.png" alt="lens">
             </div>
@@ -37,14 +38,12 @@
         <img src="./assets/img/pokeball.png" alt="">
     </div>
 
-    <div class="content_max_width">
+    <div id="content_max_width" class="content_max_width">
         <main id="content" class="content d_none">
         </main>
-    </div>
-    
-
-    <div class="btn_section">
-        <button onclick="loadMore()" id="btn_load_more" class="btn_load_more">Mehr Laden</button>
+        <div id="btn_section" class="btn_section d_none">
+            <button onclick="lfetchDataJson()" id="btn_load_more" class="btn_load_more">Mehr Laden</button>
+        </div>
     </div>
 
     <div onclick="closeOverlay()" id="overlay" class="overlay d_none">

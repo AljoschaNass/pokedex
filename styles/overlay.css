@@ -8,6 +8,7 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.500);
     cursor: pointer;
+    z-index: 2;
 }
 
 .singleOverlay {

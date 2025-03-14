@@ -53,13 +53,11 @@ function showContent() {
     enableLoadMoreButton();
     let loadingScreenRef = document.getElementById("loading_screen");
     let contentRef = document.getElementById("content");
+    let btnSectionRef = document.getElementById("btn_section");
 
     loadingScreenRef.classList.add("d_none");
     contentRef.classList.remove("d_none");
-}
-
-function loadMore() {
-    fetchDataJson();
+    btnSectionRef.classList.remove("d_none");
 }
 
 function disableLoadMoreButton() {
@@ -188,7 +186,7 @@ function stopEventBubbling(event) {
 }
 
 function togglePositionFixed() {
-    let contentRef = document.getElementById("content");
+    let contentRef = document.getElementById("content_max_width");
     contentRef.classList.toggle("position_fixed");
 }
 
@@ -202,11 +200,20 @@ function searchPokemon() {
     let inputRefLow = inputRef.value.toLowerCase();
         
     if(inputRefLow.length >= 3) {
+        inputRef.placeholder = "Suche...";
+        inputRef.classList.remove("error_search");
         searchingInput = inputRefLow;
         currentPokemonNames = allPokemonNames.filter(checkPokemons);    
         inputRef.value = "";
-    } else {
+    } else if (inputRefLow.length == 0) {
         currentPokemonNames = allPokemonNames;
+        inputRef.placeholder = "Suche...";
+        inputRef.classList.remove("error_search");
+    } else {
+        inputRef.value = "";
+        currentPokemonNames = allPokemonNames;
+        inputRef.placeholder = "Mindestens drei Zeichen..";
+        inputRef.classList.add("error_search");
     }            
     renderPokemons();
 }
@@ -216,33 +223,17 @@ function checkPokemons(name) {
   }
 
   function setOverlayStats(id) {
-    let aboutRef = document.getElementById("about_section");
-    let baseStatsRef = document.getElementById("base_stats_section");
-    let evolutionRef = document.getElementById("evolution_section");
-    let movesRef = document.getElementById("moves_section");
-    let currentSectionRef = document.getElementById(id + "_section")
+    let lastStatRef = document.getElementById(selectedStat + "_section");
+    lastStatRef.classList.add("d_none");
+
+    let selectedStatRef = document.getElementById(id + "_section");
+    selectedStatRef.classList.remove("d_none");
+
+    let lastBorderRef = document.getElementById(selectedStat + "_link");
+    lastBorderRef.classList.remove("selected");
+
+    let selectedBorderRef = document.getElementById(id + "_link");
+    selectedBorderRef.classList.add("selected");
 
     selectedStat = id;
-
-    aboutRef.classList.add("d_none");
-    baseStatsRef.classList.add("d_none");
-    evolutionRef.classList.add("d_none");
-    movesRef.classList.add("d_none");
-    currentSectionRef.classList.remove("d_none");
-
-    setOverlayStatsBorder(id);
-  }
-
-  function setOverlayStatsBorder(id) {
-    let aboutRef = document.getElementById("about_link");
-    let baseStatsRef = document.getElementById("base_stats_link");
-    let evolutionRef = document.getElementById("evolution_link");
-    let movesRef = document.getElementById("moves_link");
-    let currentSectionRef = document.getElementById(id + "_link")
-
-    aboutRef.classList.remove("selected");
-    baseStatsRef.classList.remove("selected");
-    evolutionRef.classList.remove("selected");
-    movesRef.classList.remove("selected");
-    currentSectionRef.classList.add("selected");
   }

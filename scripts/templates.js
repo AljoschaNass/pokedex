@@ -36,7 +36,7 @@ function templateOverlay(indexCurrent) {
         </div>
         <div class="overlay_stats">
             <div class="overlay_links">
-                <a onclick="setOverlayStats('about')" id="about_link" class="selected" href="#about_link">About</a>
+                <a onclick="setOverlayStats('about')" id="about_link" href="#about_link">About</a>
                 <a onclick="setOverlayStats('base_stats')" id="base_stats_link" href="#base_stats_link">Base Stats</a>
                 <a onclick="setOverlayStats('evolution')" id="evolution_link" href="#evolution_link">Evolution</a>
                 <a onclick="setOverlayStats('moves')" id="moves_link" href="#moves_link">Moves</a>
