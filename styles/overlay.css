@@ -23,7 +23,30 @@
     cursor: default;
 }
 
-.singleOverlay h2 {
+.overlay_header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.overlay_header button{
+    cursor: pointer;
+    background-color: wheat;
+    border: 0;
+    border-radius: 6px;
+    padding: 0 8px;
+    height: 32px;
+    color: darkred;
+    display: none;
+}
+
+.overlay_header button:hover{
+    color: #112A2C;
+}
+
+.overlay_header h2 {
     color: white;
     font-size: 20px;
 }
@@ -118,4 +141,30 @@ tr td:first-child {
 
 .current_count {
     font-size: 20px;
+}
+
+@media(max-width:600px) {
+    .overlay_header{
+        justify-content: space-between;
+    }
+    .overlay_header button{
+        display: unset;
+    }
+}
+
+@media(max-width:540px) {
+    .singleOverlay{
+        height: calc(100vh -(104px + 5px));
+        width: calc(100vw - 5px);
+        border-radius: 12px;
+    }
+}
+
+@media(max-width:440px) {
+    .singleOverlay{
+        padding: 12px;
+    }
+    .overlay_links{
+        font-size: 18px;
+    }
 }

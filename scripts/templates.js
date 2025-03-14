@@ -21,8 +21,12 @@ function templateType(index,indexType) {
 }
 
 function templateOverlay(indexCurrent) {
-    return `    
-        <h2 class="pokemon_name">${currentPokemons[indexCurrent].name}</h2>
+    return `   
+        <div class="overlay_header">
+            <button onclick="closeOverlay()">Zurück</button> 
+            <h2 class="pokemon_name">${currentPokemons[indexCurrent].name}</h2>
+            <h3></h3>
+        </div>
         <div class="overlay_img_section">
             <div id="overlay_types" class="overlay_types">
                 <img class="overlay_type_icons" src="./assets/icons/grass.svg" alt="">
