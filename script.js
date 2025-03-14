@@ -40,6 +40,8 @@ async function savePokemonData(responseAsJson) {
         allPokemons.push(pokemonResponseAsJson);   
         allPokemonNames.push(pokemonResponseAsJson.name);   
     }
+    console.log(allPokemons[0]);
+    
     currentPokemons = allPokemons;   
     currentPokemonNames = allPokemonNames; 
     renderPokemons();

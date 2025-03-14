@@ -49,15 +49,15 @@ function templateOverlay(indexCurrent) {
                     </tr>
                     <tr>
                         <td>Height</td>
-                        <td>0,${currentPokemons[indexCurrent].height}0cm</td>
+                        <td>${currentPokemons[indexCurrent].height / 10}m</td>
                     </tr>
                     <tr>
                         <td>Weight</td>
-                        <td>6,9kg</td>
+                        <td>${currentPokemons[indexCurrent].weight / 10}kg</td>
                     </tr>
                     <tr>
                         <td>Abilities</td>
-                        <td>${currentPokemons[indexCurrent].abilities[0].ability}</td>
+                        <td>${currentPokemons[indexCurrent].abilities[0].ability.name}</td>
                     </tr>
                     <tr>
                         <td><strong>Breeding</strong></td>
@@ -121,7 +121,12 @@ function templateOverlay(indexCurrent) {
                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/3.svg" alt="">
             </div>
             <div id="moves_section" class="moves d_none">
-    
+                <table>
+                    <tr><td>${currentPokemons[indexCurrent].moves[0].move.name}</td></tr>
+                    <tr><td>${currentPokemons[indexCurrent].moves[1].move.name}</td></tr>
+                    <tr><td>${currentPokemons[indexCurrent].moves[2].move.name}</td></tr>
+                    <tr><td>${currentPokemons[indexCurrent].moves[3].move.name}</td></tr>
+                </table>
             </div>
         </div>
         <div class="control_buttons_overlay">
