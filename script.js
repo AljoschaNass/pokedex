@@ -10,7 +10,7 @@ let typesArray = ["grass", "fire", "water", "bug", "normal", "poison",
                 "flying", "electric", "ground", "fairy", "fighting", 
                 "psychic", "rock", "steel", "ice", "ghost", "dragon", 
                 "dark"
-    ]
+                ];
 
 let input = document.getElementById("searching");
 input.addEventListener("keypress", function(event) {
@@ -39,9 +39,7 @@ async function savePokemonData(responseAsJson) {
         let pokemonResponseAsJson = await pokemonResponse.json();
         allPokemons.push(pokemonResponseAsJson);   
         allPokemonNames.push(pokemonResponseAsJson.name);   
-    }
-    console.log(allPokemons[0]);
-    
+    }    
     currentPokemons = allPokemons;   
     currentPokemonNames = allPokemonNames; 
     renderPokemons();
@@ -141,16 +139,14 @@ function openOverlay(indexCurrent) {
     selectedStat = "about";
     renderOverlay(indexCurrent);
     let overlayRef = document.getElementById("overlay");
-    overlayRef.classList.remove("d_none");
-    overlayRef.classList.add("d_flex");
+    overlayRef.classList.replace("d_none", "d_flex");
     togglePositionFixed();
     setOverlayStats(selectedStat);
 }
 
 function closeOverlay() {
     let overlayRef = document.getElementById("overlay");
-    overlayRef.classList.add("d_none");
-    overlayRef.classList.remove("d_flex");
+    overlayRef.classList.replace("d_flex", "d_none");
     togglePositionFixed();
     selectedStat = "about";
 }
@@ -200,29 +196,35 @@ function searchPokemon() {
     let inputRefLow = inputRef.value.toLowerCase();
         
     if(inputRefLow.length >= 3) {
-        inputRef.placeholder = "Suche...";
-        inputRef.classList.remove("error_search");
+        resetSearchInput(inputRef);
         searchingInput = inputRefLow;
         currentPokemonNames = allPokemonNames.filter(checkPokemons);    
-        inputRef.value = "";
     } else if (inputRefLow.length == 0) {
+        resetSearchInput(inputRef);
         currentPokemonNames = allPokemonNames;
-        inputRef.placeholder = "Suche...";
-        inputRef.classList.remove("error_search");
     } else {
-        inputRef.value = "";
-        currentPokemonNames = allPokemonNames;
-        inputRef.placeholder = "Mindestens drei Zeichen..";
-        inputRef.classList.add("error_search");
-    }            
+        setWrongSearch(inputRef);
+    }  
+    inputRef.value = "";          
     renderPokemons();
+}
+
+function setWrongSearch(inputRef) {
+    currentPokemonNames = allPokemonNames;
+    inputRef.placeholder = "Mindestens drei Zeichen..";
+    inputRef.classList.add("error_search");
+}
+
+function resetSearchInput(inputRef) {
+    inputRef.placeholder = "Suche...";
+    inputRef.classList.remove("error_search");
 }
 
 function checkPokemons(name) {
     return name.includes(searchingInput);
   }
 
-  function setOverlayStats(id) {
+function setOverlayStats(id) {
     let lastStatRef = document.getElementById(selectedStat + "_section");
     lastStatRef.classList.add("d_none");
 
@@ -236,4 +238,4 @@ function checkPokemons(name) {
     selectedBorderRef.classList.add("selected");
 
     selectedStat = id;
-  }
+}
