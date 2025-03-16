@@ -1,5 +1,5 @@
 function templatePokemonCard(index, indexCurrent) {
-    return `
+  return `
         <div onclick="openOverlay(${indexCurrent})" id="pokecard_${index}" class="pokecard">
             <div id="pokecard_header" class="pokecard_header">
                 <h3>#${allPokemons[index].id}</h3>
@@ -14,14 +14,14 @@ function templatePokemonCard(index, indexCurrent) {
     `;
 }
 
-function templateType(index,indexType) {
-    return `
+function templateType(index, indexType) {
+  return `
         <img src="./assets/icons/${currentPokemons[index].types[indexType].type.name}.svg" alt="">
     `;
 }
 
 function templateOverlay(indexCurrent) {
-    return `   
+  return `   
         <div class="overlay_header">
             <button onclick="closeOverlay()">Zurück</button> 
             <h2 class="pokemon_name">${currentPokemons[indexCurrent].name}</h2>
@@ -32,7 +32,10 @@ function templateOverlay(indexCurrent) {
                 <img class="overlay_type_icons" src="./assets/icons/grass.svg" alt="">
                 <img class="overlay_type_icons" src="./assets/icons/poison.svg" alt="">
             </div>
-            <img class="overlay_img" src="${currentPokemons[indexCurrent].sprites.other.dream_world.front_default}" alt="${currentPokemons[indexCurrent].name}-image">
+            <img class="overlay_img" src="${
+              currentPokemons[indexCurrent].sprites.other.dream_world
+                .front_default
+            }" alt="${currentPokemons[indexCurrent].name}-image">
         </div>
         <div class="overlay_stats">
             <div class="overlay_links">
@@ -57,7 +60,10 @@ function templateOverlay(indexCurrent) {
                     </tr>
                     <tr>
                         <td>Abilities</td>
-                        <td>${currentPokemons[indexCurrent].abilities[0].ability.name}</td>
+                        <td>${
+                          currentPokemons[indexCurrent].abilities[0].ability
+                            .name
+                        }</td>
                     </tr>
                     <tr>
                         <td><strong>Breeding</strong></td>
@@ -80,36 +86,50 @@ function templateOverlay(indexCurrent) {
                 <table>
                     <tr>
                         <td>HP</td>
-                        <td>${currentPokemons[indexCurrent].stats[0].base_stat}</td>
+                        <td>${
+                          currentPokemons[indexCurrent].stats[0].base_stat
+                        }</td>
                     </tr>
                     <tr>
                         <td>Attack</td>
-                        <td>${currentPokemons[indexCurrent].stats[1].base_stat}</td>
+                        <td>${
+                          currentPokemons[indexCurrent].stats[1].base_stat
+                        }</td>
                     </tr>
                     <tr>
                         <td>Defense</td>
-                        <td>${currentPokemons[indexCurrent].stats[2].base_stat}</td>
+                        <td>${
+                          currentPokemons[indexCurrent].stats[2].base_stat
+                        }</td>
                     </tr>
                     <tr>
                         <td>Sp. Atk</td>
-                        <td>${currentPokemons[indexCurrent].stats[3].base_stat}</td>
+                        <td>${
+                          currentPokemons[indexCurrent].stats[3].base_stat
+                        }</td>
                     </tr>
                     <tr>
                         <td>Sp. Def</td>
-                        <td>${currentPokemons[indexCurrent].stats[4].base_stat}</td>
+                        <td>${
+                          currentPokemons[indexCurrent].stats[4].base_stat
+                        }</td>
                     </tr>
                     <tr>
                         <td>Speed</td>
-                        <td>${currentPokemons[indexCurrent].stats[5].base_stat}</td>
+                        <td>${
+                          currentPokemons[indexCurrent].stats[5].base_stat
+                        }</td>
                     </tr>
                     <tr>
                         <td>Total</td>
-                        <td>${currentPokemons[indexCurrent].stats[0].base_stat 
-                            + currentPokemons[indexCurrent].stats[1].base_stat 
-                            + currentPokemons[indexCurrent].stats[2].base_stat 
-                            + currentPokemons[indexCurrent].stats[3].base_stat 
-                            + currentPokemons[indexCurrent].stats[4].base_stat 
-                            + currentPokemons[indexCurrent].stats[5].base_stat}</td>
+                        <td>${
+                          currentPokemons[indexCurrent].stats[0].base_stat +
+                          currentPokemons[indexCurrent].stats[1].base_stat +
+                          currentPokemons[indexCurrent].stats[2].base_stat +
+                          currentPokemons[indexCurrent].stats[3].base_stat +
+                          currentPokemons[indexCurrent].stats[4].base_stat +
+                          currentPokemons[indexCurrent].stats[5].base_stat
+                        }</td>
                     </tr>
                 </table>
             </div>
@@ -122,19 +142,29 @@ function templateOverlay(indexCurrent) {
             </div>
             <div id="moves_section" class="moves d_none">
                 <table>
-                    <tr><td>${currentPokemons[indexCurrent].moves[0].move.name}</td></tr>
-                    <tr><td>${currentPokemons[indexCurrent].moves[1].move.name}</td></tr>
-                    <tr><td>${currentPokemons[indexCurrent].moves[2].move.name}</td></tr>
-                    <tr><td>${currentPokemons[indexCurrent].moves[3].move.name}</td></tr>
+                    <tr><td>${
+                      currentPokemons[indexCurrent].moves[0].move.name
+                    }</td></tr>
+                    <tr><td>${
+                      currentPokemons[indexCurrent].moves[1].move.name
+                    }</td></tr>
+                    <tr><td>${
+                      currentPokemons[indexCurrent].moves[2].move.name
+                    }</td></tr>
+                    <tr><td>${
+                      currentPokemons[indexCurrent].moves[3].move.name
+                    }</td></tr>
                 </table>
             </div>
         </div>
         <div class="control_buttons_overlay">
             <button onclick="previousPokemon(event, ${indexCurrent})" id="previous_button"><</button>
-            <span class="current_count">${indexCurrent + 1} / ${currentPokemons.length}</span>
+            <span class="current_count">${indexCurrent + 1} / ${
+    currentPokemons.length
+  }</span>
             <button onclick="nextPokemon(event, ${indexCurrent})" id="next_button">></button>
         </div>
         
         
-        `
+        `;
 }

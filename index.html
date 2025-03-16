@@ -1,71 +1,88 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="./styles/overlay.css">
-    <link rel="stylesheet" href="styles/standard.css">
-    <link rel="stylesheet" href="styles/assets.css">
-    <link rel="stylesheet" href="styles/color.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/overlay.css" />
+    <link rel="stylesheet" href="styles/standard.css" />
+    <link rel="stylesheet" href="styles/color.css" />
 
-    <script src="./scripts/db.js"></script>
     <script src="./scripts/templates.js"></script>
-    
+
     <title>Pokedex</title>
-    <link rel="icon" type="image/x-icon" href="./assets/img/pokeball.png">
-</head>
-<body onload="init()" id="body">
-
-<div id="content_wraper" class="content_wraper">
-
-    <header>
+    <link rel="icon" type="image/x-icon" href="./assets/img/pokeball.png" />
+  </head>
+  <body onload="init()" id="body">
+    <div id="content_wraper" class="content_wraper">
+      <header>
         <div class="header">
-            <div class="header_logo">
-                <img src="./assets/img/pokeball.png" alt="pokeball">
-                <h1>Pokedex</h1>
-            </div>
-            <div class="searching_section">
-                <button onclick="searchPokemon()" id="btn_back" class="btn_back"><<</button>
-                <input id="searching" class="input_search" type="text" value="" placeholder="Suche...">
-                <img onclick="searchPokemon()" id="btn_search" class="img_search" src="./assets/img/lens.png" alt="lens">
-            </div>
+          <div class="header_logo">
+            <img src="./assets/img/pokeball.png" alt="pokeball" />
+            <h1>Pokedex</h1>
+          </div>
+          <div class="searching_section">
+            <button onclick="searchPokemon()" id="btn_back" class="btn_back">
+              <<
+            </button>
+            <input
+              id="searching"
+              class="input_search"
+              type="text"
+              value=""
+              placeholder="Suche..."
+            />
+            <img
+              onclick="searchPokemon()"
+              id="btn_search"
+              class="img_search"
+              src="./assets/img/lens.png"
+              alt="lens"
+            />
+          </div>
         </div>
-    </header>
+      </header>
 
-    <div class="loading_screen" id="loading_screen">
-        <img src="./assets/img/pokeball.png" alt="">
-    </div>
+      <div class="loading_screen" id="loading_screen">
+        <img src="./assets/img/pokeball.png" alt="" />
+      </div>
 
-    <div id="content_max_width" class="content_max_width">
-        <main id="content" class="content d_none">
-        </main>
+      <div id="content_max_width" class="content_max_width">
+        <main id="content" class="content d_none"></main>
         <div id="btn_section" class="btn_section d_none">
-            <button onclick="fetchDataJson()" id="btn_load_more" class="btn_load_more">Mehr Laden</button>
+          <button
+            onclick="fetchDataJson()"
+            id="btn_load_more"
+            class="btn_load_more"
+          >
+            Mehr Laden
+          </button>
         </div>
-    </div>
+      </div>
 
-    <div onclick="closeOverlay()" id="overlay" class="overlay d_none">
-        <div onclick="stopEventBubbling(event)" id="singleOverlay" class="singleOverlay">
-            
-        </div>
-    </div>
+      <div onclick="closeOverlay()" id="overlay" class="overlay d_none">
+        <div
+          onclick="stopEventBubbling(event)"
+          id="singleOverlay"
+          class="singleOverlay"
+        ></div>
+      </div>
 
-    <footer>
+      <footer>
         <div class="footer">
-            <div class="copyright">
-                <p>Copyright 2025 </p>
-                <p>Aljoscha Naß</p>
-            </div>
-            <div class="links">
-                <a href="html/impressum.html" target="_blank">Impressum</a>
-                <a href="html/datenschutz.html" target="_blank">Datenschutz</a>
-            </div>
+          <div class="copyright">
+            <p>Copyright 2025</p>
+            <p>Aljoscha Naß</p>
+          </div>
+          <div class="links">
+            <a href="html/impressum.html" target="_blank">Impressum</a>
+            <a href="html/datenschutz.html" target="_blank">Datenschutz</a>
+          </div>
         </div>
-    </footer>
-</div>
+      </footer>
+    </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
