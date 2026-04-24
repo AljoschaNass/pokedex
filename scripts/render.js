@@ -15,6 +15,12 @@ function renderGrid() {
   contentRef.innerHTML = visible.map(templateCard).join("");
 }
 
+function renderTypeFilter() {
+  const ref = document.getElementById("type_filter");
+  if (!ref) return;
+  ref.innerHTML = templateTypeFilter(state.selectedTypes);
+}
+
 function renderOverlay(pokemonId) {
   const pokemon = state.pokemons.find((p) => p.id === pokemonId);
   if (!pokemon) return;
@@ -98,14 +104,25 @@ function togglePositionFixed(fix) {
 
 function applyFilters() {
   state.filteredIds = state.pokemons
-    .filter(matchesSearch)
+    .filter(matchesFilters)
     .map((p) => p.id);
   renderGrid();
+}
+
+function matchesFilters(pokemon) {
+  return matchesSearch(pokemon) && matchesTypes(pokemon);
 }
 
 function matchesSearch(pokemon) {
   if (!state.searchTerm) return true;
   return pokemon.name.toLowerCase().includes(state.searchTerm);
+}
+
+function matchesTypes(pokemon) {
+  if (state.selectedTypes.length === 0) return true;
+  return pokemon.types.some((t) =>
+    state.selectedTypes.includes(t.type.name)
+  );
 }
 
 function setTheme(theme) {

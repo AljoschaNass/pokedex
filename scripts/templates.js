@@ -176,3 +176,20 @@ function templateMoves(moves) {
   return `<table>${rows}</table>`;
 }
 
+function templateTypeFilter(selectedTypes) {
+  const allActive = selectedTypes.length === 0;
+  const allBtn = `
+    <button class="type-filter-btn type-filter-all ${allActive ? "active" : ""}"
+            data-action="clear-types" aria-pressed="${allActive}">Alle</button>`;
+  const typeBtns = TYPES.map((t) => {
+    const active = selectedTypes.includes(t);
+    return `
+      <button class="type-filter-btn bg_${t} ${active ? "active" : ""}"
+              data-action="toggle-type" data-type="${t}" aria-pressed="${active}">
+        <img src="./assets/icons/${t}.svg" alt="">
+        <span class="capitalize">${t}</span>
+      </button>`;
+  }).join("");
+  return allBtn + typeBtns;
+}
+

@@ -1,5 +1,6 @@
 function init() {
   initTheme();
+  renderTypeFilter();
   wireEvents();
   startLoading();
 }
@@ -57,6 +58,7 @@ function hideLoadingScreen() {
   document.getElementById("loading_screen").classList.add("d_none");
   document.getElementById("content").classList.remove("d_none");
   document.getElementById("btn_section").classList.remove("d_none");
+  document.getElementById("type_filter").classList.remove("d_none");
 }
 
 window.addEventListener("DOMContentLoaded", init);

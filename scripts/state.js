@@ -14,6 +14,7 @@ const state = {
   filteredIds: [],
   nextUrl: `https://pokeapi.co/api/v2/pokemon?limit=${PAGE_SIZE}&offset=0`,
   searchTerm: "",
+  selectedTypes: [],
   theme: "light",
   isLoading: false,
   species: {},

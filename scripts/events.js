@@ -7,6 +7,7 @@ function wireEvents() {
   document.getElementById("overlay").addEventListener("click", onOverlayClick);
   document.getElementById("singleOverlay").addEventListener("click", onSingleOverlayClick);
   document.getElementById("theme_toggle").addEventListener("click", onToggleTheme);
+  document.getElementById("type_filter").addEventListener("click", onTypeFilterClick);
   document.addEventListener("keydown", onDocumentKeydown);
 }
 
@@ -73,6 +74,21 @@ function onSingleOverlayClick(event) {
 
 function onToggleTheme() {
   setTheme(state.theme === "dark" ? "light" : "dark");
+}
+
+function onTypeFilterClick(event) {
+  const btn = event.target.closest("[data-action]");
+  if (!btn) return;
+  if (btn.dataset.action === "clear-types") {
+    state.selectedTypes = [];
+  } else if (btn.dataset.action === "toggle-type") {
+    const type = btn.dataset.type;
+    const idx = state.selectedTypes.indexOf(type);
+    if (idx >= 0) state.selectedTypes.splice(idx, 1);
+    else state.selectedTypes.push(type);
+  }
+  renderTypeFilter();
+  applyFilters();
 }
 
 function onDocumentKeydown(event) {
