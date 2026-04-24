@@ -2,23 +2,28 @@
   box-sizing: border-box;
   margin: 0;
   scroll-behavior: smooth;
-  color: white;
+}
+
+body {
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 a {
   text-decoration: none;
+  color: var(--text);
 }
 
 a:hover {
-  color: wheat;
+  color: var(--accent);
 }
 
 .d_none {
-  display: none;
+  display: none !important;
 }
 
 .d_flex {
-  display: flex;
+  display: flex !important;
 }
 
 .position_fixed {
@@ -27,4 +32,13 @@ a:hover {
 
 .curser_loading {
   cursor: wait !important;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+button {
+  font-family: inherit;
 }
