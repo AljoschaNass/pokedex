@@ -1,9 +1,19 @@
+/**
+ * Lädt JSON von einer URL und wirft bei HTTP-Fehlern.
+ * @param {string} url
+ * @returns {Promise<any>}
+ */
 async function fetchJson(url) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`API ${res.status} for ${url}`);
   return res.json();
 }
 
+/**
+ * Holt die nächste Seite der Pokémon-Liste und ergänzt `state.nextUrl`
+ * für nachfolgende Aufrufe. Liefert die Detail-Objekte des Batches.
+ * @returns {Promise<object[]>}
+ */
 async function fetchNextBatch() {
   const listData = await fetchJson(state.nextUrl);
   state.nextUrl = listData.next;
@@ -13,6 +23,12 @@ async function fetchNextBatch() {
   return details;
 }
 
+/**
+ * Liefert die Spezies-Daten eines Pokémon. Cached in `state.species`
+ * (RAM) und LocalStorage (7-Tage-TTL).
+ * @param {number} pokemonId
+ * @returns {Promise<object>}
+ */
 async function fetchSpecies(pokemonId) {
   if (state.species[pokemonId]) return state.species[pokemonId];
 
@@ -31,6 +47,12 @@ async function fetchSpecies(pokemonId) {
   return species;
 }
 
+/**
+ * Liefert die abgeflachte Evolutionskette eines Pokémon als Array
+ * `[{ name, id }, …]`. Cached wie `fetchSpecies`.
+ * @param {number} pokemonId
+ * @returns {Promise<Array<{name: string, id: number}>>}
+ */
 async function fetchEvolutionChain(pokemonId) {
   if (state.evolutionChains[pokemonId]) return state.evolutionChains[pokemonId];
 

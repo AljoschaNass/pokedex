@@ -1,3 +1,8 @@
+/**
+ * Hängt alle DOM-Listener auf. Wird einmalig in `init()` aufgerufen.
+ * Nutzt Event-Delegation auf den Container-Elementen, damit dynamisch
+ * gerenderte Cards/Tabs ohne Re-Wiring funktionieren.
+ */
 function wireEvents() {
   document.getElementById("btn_search").addEventListener("click", onSearch);
   document.getElementById("searching").addEventListener("keypress", onSearchKeypress);
@@ -8,7 +13,17 @@ function wireEvents() {
   document.getElementById("singleOverlay").addEventListener("click", onSingleOverlayClick);
   document.getElementById("theme_toggle").addEventListener("click", onToggleTheme);
   document.getElementById("type_filter").addEventListener("click", onTypeFilterClick);
+  document.getElementById("error_banner").addEventListener("click", onErrorBannerClick);
   document.addEventListener("keydown", onDocumentKeydown);
+}
+
+function onErrorBannerClick(event) {
+  const btn = event.target.closest("[data-action]");
+  if (!btn) return;
+  if (btn.dataset.action === "retry-load") {
+    hideError();
+    loadMore();
+  }
 }
 
 function onSearch() {
@@ -100,6 +115,11 @@ function onDocumentKeydown(event) {
   }
 }
 
+/**
+ * Navigiert im Overlay zum vorherigen (-1) oder nächsten (+1) Pokémon
+ * innerhalb der aktuell gefilterten Liste. Wrap-around an beiden Enden.
+ * @param {-1|1} direction
+ */
 function navigateOverlay(direction) {
   if (state.currentOverlayId == null) return;
   if (state.filteredIds.length === 0) return;

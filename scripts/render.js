@@ -1,3 +1,8 @@
+/**
+ * Rendert das Karten-Grid für die aktuell sichtbaren Pokémon
+ * (`state.filteredIds`). Zeigt eine Empty-State-Meldung, wenn nichts
+ * passt.
+ */
 function renderGrid() {
   const contentRef = document.getElementById("content");
   const visible = state.filteredIds
@@ -21,6 +26,11 @@ function renderTypeFilter() {
   ref.innerHTML = templateTypeFilter(state.selectedTypes);
 }
 
+/**
+ * Öffnet das Detail-Overlay für ein Pokémon, setzt Position-Label,
+ * Hintergrundfarbe und triggert das Nachladen der Detail-Daten.
+ * @param {number} pokemonId
+ */
 function renderOverlay(pokemonId) {
   const pokemon = state.pokemons.find((p) => p.id === pokemonId);
   if (!pokemon) return;
@@ -51,6 +61,12 @@ function setOverlayBgColor(typeName) {
   ref.classList.add("bg_" + typeName);
 }
 
+/**
+ * Lädt Spezies- und Evolutions-Daten asynchron nach und füllt die
+ * About-/Evolution-Tabs nach. Bricht ab, wenn der User in der
+ * Zwischenzeit zu einem anderen Pokémon gewechselt hat.
+ * @param {number} pokemonId
+ */
 async function loadOverlayDetails(pokemonId) {
   const pokemon = state.pokemons.find((p) => p.id === pokemonId);
   if (!pokemon) return;
@@ -102,6 +118,10 @@ function togglePositionFixed(fix) {
     .classList.toggle("position_fixed", fix);
 }
 
+/**
+ * Aktualisiert `state.filteredIds` anhand von Suche + Typ-Filter und
+ * rendert das Grid neu.
+ */
 function applyFilters() {
   state.filteredIds = state.pokemons
     .filter(matchesFilters)
@@ -125,6 +145,11 @@ function matchesTypes(pokemon) {
   );
 }
 
+/**
+ * Setzt das aktive Theme, persistiert es in LocalStorage und
+ * aktualisiert das Toggle-Icon.
+ * @param {"light"|"dark"} theme
+ */
 function setTheme(theme) {
   state.theme = theme;
   document.documentElement.setAttribute("data-theme", theme);
@@ -148,13 +173,32 @@ function updateLoadMoreButton() {
   btn.textContent = done ? "Alle geladen" : state.isLoading ? "Lade…" : "Mehr Laden";
 }
 
-function showError(msg) {
+/**
+ * Zeigt ein Fehler-Banner für 5 Sekunden. Wenn `retryAction` gesetzt
+ * ist, wird zusätzlich ein Wiederholen-Button gerendert.
+ * @param {string} msg
+ * @param {string} [retryAction] data-action des Retry-Buttons
+ */
+function showError(msg, retryAction) {
   const banner = document.getElementById("error_banner");
   if (!banner) return;
-  banner.textContent = msg;
+  const retryBtn = retryAction
+    ? `<button type="button" class="error-retry-btn" data-action="${retryAction}">Erneut versuchen</button>`
+    : "";
+  banner.innerHTML = `<span class="error-msg">${msg}</span>${retryBtn}`;
   banner.classList.remove("d_none");
   clearTimeout(showError._timer);
   showError._timer = setTimeout(() => banner.classList.add("d_none"), 5000);
+}
+
+/**
+ * Versteckt das Fehler-Banner sofort (z.B. nach erfolgreichem Retry).
+ */
+function hideError() {
+  const banner = document.getElementById("error_banner");
+  if (!banner) return;
+  clearTimeout(showError._timer);
+  banner.classList.add("d_none");
 }
 
 function setLoadingCursor(loading) {

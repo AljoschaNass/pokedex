@@ -8,6 +8,12 @@ const STORAGE_KEYS = {
 
 const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
+/**
+ * Liest einen Cache-Eintrag mit TTL. Liefert `null`, wenn der Eintrag
+ * fehlt, abgelaufen ist oder das Parsen fehlschlägt.
+ * @param {string} key
+ * @returns {any|null}
+ */
 function storageGetCached(key) {
   try {
     const raw = localStorage.getItem(key);
@@ -23,6 +29,12 @@ function storageGetCached(key) {
   }
 }
 
+/**
+ * Schreibt einen Cache-Eintrag mit Ablaufzeit (`CACHE_TTL_MS`).
+ * Bei Quota-Überschreitung wird stillschweigend ignoriert.
+ * @param {string} key
+ * @param {any} data
+ */
 function storageSetCached(key, data) {
   try {
     localStorage.setItem(
@@ -50,6 +62,10 @@ function storageSetRaw(key, value) {
   }
 }
 
+/**
+ * Versucht, die Pokémon-Liste + nextUrl aus dem Cache zu laden.
+ * @returns {{pokemons: object[], nextUrl: string|null}|null}
+ */
 function loadPokemonsFromCache() {
   const cached = storageGetCached(STORAGE_KEYS.POKEMONS);
   if (!cached) return null;
@@ -57,6 +73,10 @@ function loadPokemonsFromCache() {
   return { pokemons: cached, nextUrl };
 }
 
+/**
+ * Persistiert den aktuellen `state.pokemons` und `state.nextUrl` in
+ * LocalStorage.
+ */
 function savePokemonsToCache() {
   storageSetCached(STORAGE_KEYS.POKEMONS, state.pokemons);
   if (state.nextUrl) {

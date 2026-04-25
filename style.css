@@ -159,6 +159,28 @@ header {
   z-index: 3;
   max-width: 90%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.error_banner.d_none {
+  display: none !important;
+}
+
+.error-retry-btn {
+  background-color: var(--error-text);
+  color: var(--error-bg);
+  border: 0;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.error-retry-btn:hover {
+  opacity: 0.85;
 }
 
 footer {
