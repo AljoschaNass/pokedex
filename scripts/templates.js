@@ -53,11 +53,11 @@ function templateOverlay(pokemon, positionLabel) {
       <img class="overlay_img" src="${spriteUrl(pokemon)}" alt="${pokemon.name}">
     </div>
     <div class="overlay_stats">
-      <div class="overlay_links">
-        <a data-action="show-tab" data-tab="about" id="about_link" class="selected" tabindex="0">About</a>
-        <a data-action="show-tab" data-tab="base_stats" id="base_stats_link" tabindex="0">Base Stats</a>
-        <a data-action="show-tab" data-tab="evolution" id="evolution_link" tabindex="0">Evolution</a>
-        <a data-action="show-tab" data-tab="moves" id="moves_link" tabindex="0">Moves</a>
+      <div class="overlay_links" role="tablist">
+        <button type="button" data-action="show-tab" data-tab="about" id="about_link" class="overlay_tab selected" role="tab">About</button>
+        <button type="button" data-action="show-tab" data-tab="base_stats" id="base_stats_link" class="overlay_tab" role="tab">Base Stats</button>
+        <button type="button" data-action="show-tab" data-tab="evolution" id="evolution_link" class="overlay_tab" role="tab">Evolution</button>
+        <button type="button" data-action="show-tab" data-tab="moves" id="moves_link" class="overlay_tab" role="tab">Moves</button>
       </div>
       <div id="about_section" class="about">
         <p class="tab-loading">Lade…</p>

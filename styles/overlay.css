@@ -108,14 +108,18 @@
   font-size: 18px;
 }
 
-.overlay_links a {
+.overlay_tab {
   cursor: pointer;
-  padding-bottom: 4px;
+  padding: 0 0 4px 0;
+  border: 0;
   border-bottom: 3px solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
   transition: border-color 0.15s ease;
 }
 
-.overlay_links a:hover {
+.overlay_tab:hover {
   border-bottom-color: rgba(255, 255, 255, 0.5);
 }
 
