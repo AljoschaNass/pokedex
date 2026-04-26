@@ -1,10 +1,8 @@
-const CACHE_VERSION = "v1";
+const CACHE_VERSION = "v2";
 const STATIC_CACHE = `pokedex-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `pokedex-runtime-${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
-  "./",
-  "./index.html",
   "./style.css",
   "./styles/theme.css",
   "./styles/standard.css",
@@ -48,7 +46,11 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(req.url);
 
   if (url.origin === self.location.origin) {
-    event.respondWith(cacheFirst(req));
+    if (req.destination === "document") {
+      event.respondWith(networkFirst(req));
+    } else {
+      event.respondWith(cacheFirst(req));
+    }
     return;
   }
 
