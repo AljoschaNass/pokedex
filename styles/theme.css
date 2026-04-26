@@ -24,6 +24,7 @@
   --error-bg: #fee2e2;
   --error-text: #991b1b;
   --focus-ring: #60a5fa;
+  --link-color: #323232;
 }
 
 [data-theme="dark"] {
@@ -52,6 +53,7 @@
   --error-bg: #450a0a;
   --error-text: #fecaca;
   --focus-ring: #60a5fa;
+  --link-color: #cbd5e1;
 }
 
 html {
